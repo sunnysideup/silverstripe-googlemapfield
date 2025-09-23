@@ -4,5 +4,5 @@
 			$Field
 		<% end_loop %>
 	</div>
-	<div class="googlemapfield-map"></div>
+	<div class="googlemapfield-map"> </div>
 </div>

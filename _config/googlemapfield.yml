@@ -14,8 +14,8 @@ BetterBrief\GoogleMapField:
     map:
       zoom: 14
     default_field_values:
-      Latitude: 30
-      Longitude: 0
+      Latitude: -33.8727409
+      Longitude: 151.2057136
 
 SilverStripe\Admin\LeftAndMain:
   extensions:

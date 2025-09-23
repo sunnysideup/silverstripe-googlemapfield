@@ -13,12 +13,14 @@
 namespace BetterBrief;
 
 use Override;
+use SilverStripe\Core\Environment;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DataObjectInterface;
+use SilverStripe\View\Requirements;
 
 class GoogleMapField extends FormField
 {
@@ -140,7 +142,7 @@ class GoogleMapField extends FormField
 
         if ($this->options['show_search_box']) {
             $this->children->push(
-                TextField::create('Search')
+                TextField::create($name . '[Search]')
                     ->addExtraClass('googlemapfield-searchfield')
                     ->setAttribute('placeholder', 'Search for a location')
             );
@@ -157,7 +159,7 @@ class GoogleMapField extends FormField
     #[Override]
     public function Field($properties = [])
     {
-        $jsOptions = [
+        $fieldOptions = [
             'coords' => [
                 $this->recordFieldData('Latitude'),
                 $this->recordFieldData('Longitude')
@@ -168,8 +170,8 @@ class GoogleMapField extends FormField
             ],
         ];
 
-        $jsOptions = array_replace_recursive($jsOptions, $this->options);
-        $this->setAttribute('data-settings', json_encode($jsOptions));
+        $fieldOptions = array_replace_recursive($fieldOptions, $this->options);
+        $this->setAttribute('data-settings', json_encode($fieldOptions));
         return parent::Field($properties);
     }
 

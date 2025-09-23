@@ -7,12 +7,11 @@
 	var gmapsAPILoaded = false;
 
 	// Run this code for every googlemapfield
-	function initField() {
-		var field = $(this);
-		if(field.data('gmapfield-inited') === true) {
+	function initMapField(field) {
+		if(field.attr('data-gmapfield-inited') === true) {
 			return;
 		}
-		field.data('gmapfield-inited', true);
+		field.attr('data-gmapfield-inited', true);
 		var settings = JSON.parse(field.attr('data-settings')),
 			centre = new google.maps.LatLng(settings.coords[0], settings.coords[1]),
 			mapSettings = {
@@ -105,7 +104,7 @@
 		// Populate the fields to the current centre
 		google.maps.event.addListenerOnce(map, 'idle', function(){
 			updateField(map.getCenter(), true);
-			updateZoom(init);
+			updateZoom(initGoogleMapField);
 		});
 
 		google.maps.event.addListener(marker, 'dragend', centreOnMarker);
@@ -127,45 +126,35 @@
 
 	$.fn.gmapfield = function() {
 		return this.each(function() {
-			initField.call(this);
+			initMapField.call(this);
 		});
 	}
 
-	function init() {
+	function initGoogleMapField() {
 		var mapFields = $('.googlemapfield:visible').gmapfield();
-		mapFields.each(initField);
 	}
 
 	// Export the init function
 	window.googlemapfieldInit = function() {
 		gmapsAPILoaded = true;
-		init();
+		initGoogleMapField();
 	}
 
 	// CMS stuff: set the init method to re-run if the page is saved or pjaxed
-	// there are no docs for the CMS implementation of entwine, so this is hacky
 	if(!!$.fn.entwine && $(document.body).hasClass('cms')) {
-		(function setupCMS() {
-			var matchFunction = function() {
-				if(gmapsAPILoaded) {
-					init();
+
+		$.entwine('ss.googlemapfield', function($) {
+			$('.googlemapfield').entwine({
+				onmatch: function() {
+					if (!gmapsAPILoaded) {
+						return;
+					}
+					initMapField($(this));
+					this._super();
 				}
-			};
-			$.entwine('googlemapfield', function($) {
-				$('.cms-tabset').entwine({
-					onmatch: matchFunction
-				});
-				$('.cms-tabset-nav-primary li').entwine({
-					onclick: matchFunction
-				});
-				$('.ss-tabset li').entwine({
-					onclick: matchFunction
-				});
-				$('.cms-edit-form').entwine({
-					onmatch: matchFunction
-				});
 			});
-		}());
+		});
+
 	}
 
 }(jQuery));
