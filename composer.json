@@ -11,7 +11,7 @@
     "geolocation"
   ],
   "homepage": "http://github.com/BetterBrief/googlemapfield",
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Will Morgan",
