@@ -1,33 +1,40 @@
 {
-    "name": "sunnysideup/silverstripe-googlemapfield",
-    "type": "silverstripe-vendormodule",
-    "description": "Save locations using latitude/longitude DataObject fields.",
-    "keywords": ["maps","google", "googlemapfield", "silverstripe", "map", "geolocation"],
-    "homepage": "http://github.com/BetterBrief/googlemapfield",
-    "license": "BSD",
-    "authors": [
-        {
-            "name": "Will Morgan",
-            "homepage": "http://twitter.com/willmorgan",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": ">=8.1",
-        "silverstripe/framework": "^4 || ^5"
-    },
-    "autoload": {
-        "psr-4": {
-            "BetterBrief\\": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.x-dev"
-        },
-        "expose": [
-            "client/css",
-            "client/js"
-        ]
+  "name": "sunnysideup/silverstripe-googlemapfield",
+  "type": "silverstripe-vendormodule",
+  "description": "Save locations using latitude/longitude DataObject fields.",
+  "keywords": [
+    "maps",
+    "google",
+    "googlemapfield",
+    "silverstripe",
+    "map",
+    "geolocation"
+  ],
+  "homepage": "http://github.com/BetterBrief/googlemapfield",
+  "license": "BSD",
+  "authors": [
+    {
+      "name": "Will Morgan",
+      "homepage": "http://twitter.com/willmorgan",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "silverstripe/framework": "^4 || ^5"
+  },
+  "autoload": {
+    "psr-4": {
+      "BetterBrief\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.x-dev"
+    },
+    "expose": [
+      "client/css",
+      "client/js"
+    ]
+  }
 }
