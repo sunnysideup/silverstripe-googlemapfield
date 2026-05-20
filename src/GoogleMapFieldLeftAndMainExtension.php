@@ -13,7 +13,7 @@ class GoogleMapFieldLeftAndMainExtension extends Extension
         $gmapsParams = [
             'callback' => 'googlemapfieldInit',
         ];
-        $key = Environment::getEnv('APP_GOOGLE_MAPS_KEY') ?: GoogleMapField::config()->get('api_key');
+        $key = Environment::getEnv('APP_GOOGLE_MAPS_KEY') ?: GoogleMapField::config()->default_options['api_key'];
         if ($key) {
             $gmapsParams['key'] = $key;
         }
